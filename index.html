@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <link rel="apple-touch-icon" href="favicon.png">
+    <link rel="Shortcut Icon" href="favicon.png" type="image/x-icon">
+    <title>H5适配之flexible</title>
+
+    <style>
+        html,
+        body {
+            height: 100vh;
+            background-color: #ee0a3b;
+        }
+
+        .item-section {
+            min-height: 100%;
+            background-color: #ee0a3b;
+            position: relative;
+            font-size: 12px
+        }
+
+        [data-dpr="2"] .item-section {
+            font-size: 24px
+        }
+
+        [data-dpr="3"] .item-section {
+            font-size: 36px
+        }
+
+        .item-section_header {
+            text-align: center
+        }
+
+        .item-section_header img {
+            width: 10rem
+        }
+
+        .item-section ul {
+            padding: .133333rem
+        }
+
+        .flag {
+            display: table;
+            width: 100%;
+            margin-bottom: 1px;
+            background-color: #fff
+        }
+
+        .flag .flag-item {
+            display: table-cell;
+            padding: .16rem 0;
+            vertical-align: top;
+            background-color: #fff
+        }
+
+        .flag .flag-item.figcaption {
+            width: 133.333333rem;
+            padding-left: .2rem;
+            padding-right: .2rem;
+            position: relative
+        }
+
+        .flag .flag-item.figure {
+            width: 2.4rem;
+            height: 2.4rem
+        }
+
+        .flag .flag-item img {
+            width: 2.4rem;
+            height: 2.4rem;
+            vertical-align: top
+        }
+
+        .flag .flag-title a {
+            color: #333;
+            line-height: 1.25;
+            overflow: hidden;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            box-orient: vertical;
+            display: -webkit-box;
+            display: box
+        }
+
+        .flag .flag-price {
+            padding: .15rem 0 .2rem
+        }
+
+        .flag .flag-price span {
+            display: inline-block;
+            background-color: #ee0a3b;
+            vertical-align: middle;
+            border-radius: .026667rem;
+            padding: .026667rem .08rem .013333rem;
+            color: #fff;
+            font-weight: 700;
+            margin-right: .066667rem;
+            font-size: 11px
+        }
+
+        [data-dpr="2"] .flag .flag-price span {
+            font-size: 22px
+        }
+
+        [data-dpr="3"] .flag .flag-price span {
+            font-size: 33px
+        }
+
+        .flag .flag-price strong {
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: 700;
+            color: #ee0a3b;
+            font-size: 16px;
+            margin-right: .16rem
+        }
+
+        [data-dpr="2"] .flag .flag-price strong {
+            font-size: 32px
+        }
+
+        [data-dpr="3"] .flag .flag-price strong {
+            font-size: 48px
+        }
+
+        .flag .flag-price small {
+            display: inline-block;
+            vertical-align: middle;
+            font-weight: 700;
+            color: #ee0a3b;
+            font-size: 12px
+        }
+
+        [data-dpr="2"] .flag .flag-price small {
+            font-size: 24px
+        }
+
+        [data-dpr="3"] .flag .flag-price small {
+            font-size: 36px
+        }
+
+        .flag .flag-type {
+            color: #ff3600
+        }
+
+        .flag .flag-btn {
+            position: absolute;
+            width: 2.133333rem;
+            height: .64rem;
+            line-height: .64rem;
+            background-color: #ee0a3b;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            bottom: .133333rem;
+            right: .2rem;
+            border-radius: .026667rem
+        }
+
+        [data-dpr="2"] .flag .flag-btn {
+            font-size: 28px
+        }
+
+        [data-dpr="3"] .flag .flag-btn {
+            font-size: 42px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="item-section">
+            <div class="item-section_header">
+                <h2><img :src="brannerImag" alt=""></h2>
+            </div>
+            <ul>
+                <li v-for="item in items" class="flag" :href="item.itemLink">
+                    <a class="figure flag-item" :href="item.itemLink">
+                        <img :src="item.imgSrc" alt="">
+                    </a>
+                    <div class="figcaption flag-item">
+                        <div class="flag-title"><a :href="item.itemLink" title="">{{item.poductName}}</a></div>
+                        <div class="flag-price">
+                            <span>双11价</span><strong>¥{{item.price}}</strong><small>({{item.preferential}})</small>
+                        </div>
+                        <div class="flag-type">{{item.activityType}}</div>
+                        <a class="flag-btn" :href="item.shopLink">{{item.activeName}}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <script src="./js/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                "brannerImag": "./img/banner.png",
+                items: [{
+                        "itemLink": "https://www.baidu.com/",
+                        "imgSrc": "./img/goods.png",
+                        "poductName": "Carter's1年式灰色长袖连体衣包脚爬服全棉鲸鱼男婴儿童装115G093",
+                        "price": "299.06",
+                        "preferential": "满400减100",
+                        "activityType": "1小时内热卖5885件",
+                        "shopLink": "https://www.baidu.com/",
+                        "activeName": "马上抢！"
+                    },
+                    {
+                        "itemLink": "https://www.baidu.com/",
+                        "imgSrc": "./img/goods.png",
+                        "poductName": "Carter's1年式灰色长袖连体衣包脚爬服全棉鲸鱼男婴儿童装115G093",
+                        "price": "688.5",
+                        "preferential": "满400减100",
+                        "activityType": "1小时内热卖5885件",
+                        "shopLink": "https://www.baidu.com/",
+                        "activeName": "马上抢！"
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+
+</html>

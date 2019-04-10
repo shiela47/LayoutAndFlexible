@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/flexible.js"></script>
+    <link rel="apple-touch-icon" href="favicon2.png">
+    <link rel="Shortcut Icon" href="favicon2.png" type="image/x-icon">
+    <title>双飞翼不固定高之flexible适配</title>
+
+    <style>
+        html {
+            box-sizing: border-box
+        }
+
+        *,
+        *:after,
+        *:before {
+            box-sizing: inherit
+        }
+
+        header,
+        footer {
+            height: 50px;
+            text-align: center;
+            background-color: tan;
+            font-size: 12px;
+        }
+        
+        [data-dpr="2"] header{font-size: 24px;height: 100px;}
+        [data-dpr="3"] header{font-size: 36px;height: 150px;}
+
+        .main {
+            position: relative;
+            overflow: hidden;
+            /* height: 500px; */
+            width: 100%
+        }
+
+        .main .left {
+            width: 180px;
+            background-color: lightpink;
+            float: left;
+            margin-left: -100%;
+            /* padding-bottom: 9999px;
+            margin-bottom: -9999px */
+        }
+
+        .main .right {
+            width: 150px;
+            background-color: olive;
+            float: left;
+            margin-left: -150px;
+            /* padding-bottom: 9999px;
+            margin-bottom: -9999px */
+        }
+
+        .main .middle {
+            background-color: brown;
+            float: left;
+            width: inherit;
+        }
+
+        .middle .inner {
+            background-color: mediumvioletred;
+            margin-left: 180px;
+            margin-right: 150px;
+            /* padding-bottom: 9999px;
+            margin-bottom: -9999px */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <h3>标题</h3>
+            <p>（注意观察不同尺寸下的font-size、height）</p>
+        </header>
+
+        <section class="main">
+            <section class="middle">
+                <!-- 主体 main -->
+                <div class="inner">
+                    <p v-for="item in arr">主体中间 middle</p>
+                </div>
+            </section>
+            <article class="left">
+                <p v-for="item in arr">左侧 left</p>
+            </article>
+            <article class="right">
+                <p >右侧 right</p>
+            </article>
+        </section>
+
+        <footer>
+            版权信息
+        </footer>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                arr: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+            }
+        })
+    </script>
+</body>
+
+</html>
